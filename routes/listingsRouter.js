@@ -1,11 +1,12 @@
 import express from 'express';
-import ListingsAndReview from '../models/ListingsAndReview.js';
+import ListingsAndReviews from '../models/ListingsAndReviews.js';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const listings = await ListingsAndReview.find();
+    console.log('ListingAndReview Model:', ListingsAndReviews); // 모델 확인
+    const listings = await ListingsAndReviews.find();
     console.log(`listings =>`, { listings });
     res.json(listings);
   } catch (error) {

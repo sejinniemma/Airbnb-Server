@@ -21,7 +21,6 @@ const addressSchema = new mongoose.Schema({
   location: {
     type: {
       type: String, // "Point"
-      enum: ['Point'],
       required: true,
     },
     coordinates: { type: [Number], required: true }, // [longitude, latitude]
@@ -48,7 +47,7 @@ const hostSchema = new mongoose.Schema({
 });
 
 // 주요 스키마 정의
-const listingSchema = new mongoose.Schema({
+const listingandReviewSchema = new mongoose.Schema({
   _id: { type: String, required: true }, // listing_id
   listing_url: { type: String, required: true },
   name: { type: String, required: true },
@@ -99,6 +98,9 @@ const listingSchema = new mongoose.Schema({
 });
 
 // Listing 모델 생성
-const ListingAndReviews = mongoose.model('ListingAndReviews', listingSchema); // 모델 이름을 PascalCase로 유지
+const ListingsAndReviews = mongoose.model(
+  'ListingsAndReviews',
+  listingandReviewSchema
+);
 
-export default ListingAndReviews;
+export default ListingsAndReviews;
