@@ -1,8 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Booking as bookingsRouter } from './routes/Booking.js';
-import { ListingAndReivews as listingsRouter } from './routes/ListingAndReivews.js';
+import bookingsRouter from './routes/bookingsRouter.js';
+import listingsRouter from './routes/listingsRouter.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
-
+app.use(cors());
 // MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -22,8 +23,8 @@ mongoose
   });
 
 // Router
-app.use('/api/bookings', bookingsRouter);
-app.use('/api/listings', listingsRouter);
+app.use('/bookings', bookingsRouter);
+app.use('/listings', listingsRouter);
 
 // Server start
 app.listen(PORT, () => {
