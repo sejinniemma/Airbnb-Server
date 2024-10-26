@@ -5,8 +5,10 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    console.log('ListingAndReview Model:', ListingsAndReviews); // 모델 확인
-    const listings = await ListingsAndReviews.find();
+    const listings = await ListingsAndReviews.aggregate([
+      { $sample: { size: 10 } },
+    ]);
+
     console.log(`listings =>`, { listings });
     res.json(listings);
   } catch (error) {
